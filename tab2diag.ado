@@ -316,6 +316,7 @@ program Tab2_legend
         
         local not_0 "!= 0"
         local label_pos : char `varname2'[label_0]
+        local label_pos `"{txt:{it:not}} `macval(label_pos)'"'
         
     }
     else {
