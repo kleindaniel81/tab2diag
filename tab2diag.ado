@@ -1,4 +1,4 @@
-*! version 1.0.0  30apr2025
+*! version 1.1.0  30apr2025
 program tab2diag , rclass
     
     version 11.2
@@ -244,22 +244,19 @@ program binarize
     local varlabel : variable label `varlist'
     label variable `generate' `"`macval(varlabel)'"'
     
-    local lname : value label `varlist'
-    if ("`lname'" == "") ///
-        exit
-    
-    local label_0 : label `lname' 0 , strict
+    local label_0 : label (`varlist') 0 , strict
     char `generate'[label_0] `"`macval(label_0)'"'
     
     tempname not_0
     quietly tabulate `varlist' if `generate' & `touse' , matrow(`not_0')
-    if (r(r) != 1) ///
-        exit
-    
-    char `generate'[not_0] `=`not_0'[1,1]'
-    
-    local label_1 : label `lname' `=`not_0'[1,1]' , strict
-    char `generate'[label_1] `"`macval(label_1)'"'
+    if (r(r) == 1) {
+        
+        char `generate'[not_0] `=`not_0'[1,1]'
+        
+        local label_not_0 : label (`varlist') `=`not_0'[1,1]' , strict
+        char `generate'[label_not_0] `"`macval(label_not_0)'"'
+        
+    }
     
 end
 
@@ -294,8 +291,8 @@ program Tab2
     
     if ("`legend'" != "nolegend") {
         
-        Tab2_legend `classvar' `varname2'
         Tab2_legend `refvar'   `varname1'
+        Tab2_legend `classvar' `varname2'
         
     }
     
@@ -314,17 +311,17 @@ program Tab2_legend
     
     local varname : char `varname2'[varname]
     
-    local label_pos : char `varname2'[label_1]
-    if (`"`macval(label_pos)'"' != "") {
+    local not_0 : char `varname2'[not_0]
+    if ("`not_0'" == "") {
         
-        local not_zero : char `varname2'[not_0]
-        local exp "== `not_zero'"
+        local not_0 "!= 0"
+        local label_pos : char `varname2'[label_0]
         
     }
     else {
         
-        local label_pos : char `varname2'[label_0]
-        local exp "!= 0"
+        local not_0 "== `not_0'"
+        local label_pos : char `varname2'[label_not_0]
         
     }
     
@@ -332,7 +329,7 @@ program Tab2_legend
     
     display
     
-    Tab2_legend_line "`pos'" "`varname'" "`exp'" `"`macval(label_pos)'"'
+    Tab2_legend_line "`pos'" "`varname'" "`not_0'" `"`macval(label_pos)'"'
     Tab2_legend_line "`neg'" "`varname'" "== 0"  `"`macval(label_neg)'"'
     
 end
@@ -350,8 +347,7 @@ program Tab2_legend_line
     if (`"`macval(label)'"' != "") ///
         local label as txt "(" as res `"`macval(label)'"' as txt ")"
     
-    display as txt _col(3) "`posneg':" _col(15) "`varname' `exp' " _continue
-    display _col(`=15+18+4') `label'
+    display as txt %12s "`posneg':" _col(15) "`varname' `exp' " _col(`=15+18+4') `label'
     
 end
 
@@ -481,4 +477,5 @@ exit
 /*  _________________________________________________________________________
                                                               Version history
 
+1.1.0   30apr2025   improved legend formatting for clarity
 1.0.0   30apr2025
