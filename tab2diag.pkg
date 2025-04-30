@@ -1,0 +1,25 @@
+v 3
+d tab2diag: Stata module to compute diagnostic metrics and predictive values from 2-by-2 tables
+d
+d
+d {cmd:tab2diag} computes diagnostic test statistics from a 2-by-2 contingency table.
+d
+d KW: diagnostic test
+d KW: confusion matrix
+d KW: sensitivity and specificity
+d KW: predictive values
+d KW: ROC analyses
+d
+d Requires: Stata version 11.2
+d
+d Distribution-Date: 20250430
+d
+d Author: Daniel Klein
+d Support: email klein.daniel.81@gmail.com
+d
+f tab2diag.ado
+f tab2diagi.ado
+f tab2diagmat.ado
+f tab2diag.sthlp
+f tab2diagi.sthlp
+f tab2diagmat.sthlp
