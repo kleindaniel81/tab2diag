@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 1.0.0  29apr2025}{...}
+{* *! version 1.1.0  02may2025}{...}
 {cmd:help tab2diag}
 {hline}
 
@@ -50,7 +50,7 @@
 {col 8}{it:#FN}{col 14}false negative
 {col 8}{it:#TN}{col 14}true negative
 
-{col 8}{it:#A}{col 14}matrix name
+{col 8}{it:A}{col 14}matrix name
 
 
 {synoptset 24 tabbed}{...}
@@ -64,16 +64,16 @@ complements of proportions
 
 {syntab:SE / CI}
 {synopt :{cmd:cii(}{it:{help tab2diag##cii_method:cii_method}}{cmd:)}}method 
-for calculating standard errors and confidence intervals for proportions
+for calculating confidence intervals for proportions
 {p_end}
 {synopt :{cmd:csi(}{it:{help tab2diag##csi_method:csi_method}}{cmd:)}}method 
 for calculating confidence intervals for risk-ratios
 {p_end}
 {synopt :{cmd:cci(}{it:{help tab2diag##cci_method:cci_method}}{cmd:)}}method 
-for calculating confidence interval for odds ratio
+for calculating confidence intervals for odds ratio
 {p_end}
 {synopt :{cmd:roc(}{it:{help tab2diag##roc_method:roc_method}}{cmd:)}}method 
-for calculating standard error and confidence interval for ROC area
+for calculating standard errors and confidence intervals for ROC area
 {p_end}
 
 {syntab:Reporting}
@@ -190,7 +190,7 @@ are obtained by subtracting each original result from 1.
 
 {phang}
 {opt cii(cii_method)}
-specifies the method for calculating standard errors and confidence intervals 
+specifies the method for calculating confidence intervals 
 for proportions (sensitivity, specificity, etc.);
 see {helpb cii}.
 

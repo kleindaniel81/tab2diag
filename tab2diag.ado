@@ -1,4 +1,4 @@
-*! version 1.1.0  30apr2025
+*! version 1.1.1  02may2025
 program tab2diag , rclass
     
     version 11.2
@@ -213,7 +213,7 @@ program unab_option
     capture noisily syntax [ , `allowed_options' ]
     if ( _rc ) {
         
-        display as err "invalid suboption in {bf:`option_name'()}"
+        display as err "invalid {it:`option_name'_method} in {bf:`option_name'()}"
         exit _rc
         
     }
@@ -478,5 +478,6 @@ exit
 /*  _________________________________________________________________________
                                                               Version history
 
-1.1.0   30apr2025   improved legend formatting for clarity
+1.1.1   02may2025   improve error message for invalid -c?i()- methods
+1.1.0   30apr2025   improve legend formatting for clarity
 1.0.0   30apr2025
