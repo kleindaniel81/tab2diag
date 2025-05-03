@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 1.1.0  02may2025}{...}
+{* *! version 1.2.0  03may2025}{...}
 {cmd:help tab2diag}
 {hline}
 
@@ -72,7 +72,7 @@ for calculating confidence intervals for risk-ratios
 {synopt :{cmd:cci(}{it:{help tab2diag##cci_method:cci_method}}{cmd:)}}method 
 for calculating confidence intervals for odds ratio
 {p_end}
-{synopt :{cmd:roc(}{it:{help tab2diag##roc_method:roc_method}}{cmd:)}}method 
+{synopt :{cmdab:roc:tab(}{it:{help tab2diag##roc_method:roc_method}}{cmd:)}}method 
 for calculating standard errors and confidence intervals for ROC area
 {p_end}
 
@@ -93,7 +93,6 @@ for diagnostic metrics and predictive values
 {marker cii_method}{...}
 {synopthdr :cii_methods}
 {synoptline}
-{synopt :{opt e:xact}}calculate exact confidence intervals; the default{p_end}
 {synopt :{opt wa:ld}}calculate Wald confidence intervals{p_end}
 {synopt :{opt w:ilson}}calculate Wilson confidence intervals{p_end}
 {synopt :{opt a:gresti}}calculate Agresti-Coull confidence intervals{p_end}
@@ -105,7 +104,6 @@ for diagnostic metrics and predictive values
 {marker csi_method}{...}
 {synopthdr :csi_methods}
 {synoptline}
-{synopt :{opt w:oolf}}use Woolf approximation to calculate CI; the default{p_end}
 {synopt :{opt tb}}calculate test-based confidence intervals{p_end}
 {synoptline}
 {p2colreset}{...}
@@ -114,7 +112,7 @@ for diagnostic metrics and predictive values
 {marker cci_method}{...}
 {synopthdr :cci_methods}
 {synoptline}
-{synopt :{opt co:rnfield}}use Cornfield approximation to calculate CI; the default{p_end}
+{synopt :{opt co:rnfield}}use Cornfield approximation to calculate CI{p_end}
 {synopt :{opt w:oolf}}use Woolf approximation to calculate CI{p_end}
 {synopt :{opt tb}}calculate test-based confidence intervals{p_end}
 {synoptline}
@@ -163,9 +161,9 @@ produced by the diagnostic test or test modality.
 {pstd}
 In both {it:refvar} and {it:classvar}, 
 nonzero and nonmissing values (typically equal to 1) 
-indicate a positive status (such as diseased or abnormal) or outcome, 
+indicate a positive status or outcome (such as diseased or abnormal), 
 whereas values equal to 0 
-indicate a negative status (such as nondiseased or normal) or outcome.
+indicate a negative status or outcome (such as nondiseased or normal).
 
 {pstd}
 {cmd:tab2diagi} 
@@ -207,7 +205,7 @@ for the odds ratio;
 see {helpb cci}. 
 
 {phang}
-{opt roc(roc_method)}
+{opt roctab(roc_method)}
 specifies the method for calculating standard errors and confidence intervals 
 for the area under the ROC;
 see {helpb roctab}. 
@@ -219,7 +217,7 @@ The maximum format width is 9. See {manhelp set_cformat R:set cformat}.
 
 {phang}
 {opt percent}
-specifies that proportions (sensitivity, specificity, etc.) 
+specifies that proportions (such as sensitivity, specificity, etc.) 
 are shown as percentages. 
 
 {phang}
@@ -231,7 +229,6 @@ or as set by {helpb set level}.
 
 {title:Examples}
 
-    {hline}
 {pstd}Setup{p_end}
 {phang2}{cmd:. webuse hanley}
 

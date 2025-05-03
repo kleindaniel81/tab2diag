@@ -1,4 +1,4 @@
-*! version 1.1.1  02may2025
+*! version 1.2.0  03may2025
 program tab2diag , rclass
     
     version 11.2
@@ -20,10 +20,10 @@ program tab2diag , rclass
     
     set_format `format' , local(fmt) `percent'
     
-    unab_option cii Exact WAld Wilson Agresti Jeffreys , `cii'
-    unab_option csi Woolf tb , `csi'
+    unab_option cii WAld Wilson Agresti Jeffreys , ignore(Exact) `cii'
+    unab_option csi tb , ignore(Woolf) `csi'
     unab_option cci COrnfield Woolf tb , `cci'
-    unab_option roc BINOmial BAMber HANley , `roctab'
+    unab_option roctab BINOmial BAMber HANley , `roctab'
     
     marksample touse
     
@@ -205,18 +205,20 @@ end
 
 program unab_option
     
-    syntax anything [ , * ]
+    syntax anything [ , ignore(namelist) * ]
     
     gettoken option_name allowed_options : anything , bind
     
     local 0 , `options'
-    capture noisily syntax [ , `allowed_options' ]
+    capture noisily syntax [ , `allowed_options' `ignore' ]
     if ( _rc ) {
         
         display as err "invalid {it:`option_name'_method} in {bf:`option_name'()}"
         exit _rc
         
     }
+    
+    c_local `option_name' // void
     
     foreach option of local allowed_options {
         
@@ -464,10 +466,16 @@ program Print
     display as res _col(`=59+`fmtwidth'') `fmt' `result'[1,3] "`pct'" _continue
     display as res _col(`=70+`fmtwidth'') `fmt' `result'[1,4] "`pct'" _continue
     
-    if ("`option'" != "") ///
-        local option `" (`=strproper("`option'")')"'
+    if ("`option'" != "") {
+        
+        if ( !inlist("`option'","tb","binomial") ) ///
+            local option = strproper("`option'")
+        
+        local option "(`option')"
+        
+    }
     
-    display as txt "`option'"
+    display as txt " `option'"
     
 end
 
@@ -478,6 +486,9 @@ exit
 /*  _________________________________________________________________________
                                                               Version history
 
+1.2.0   03may2025   bug fix: failed to unabbreviate suboption roctab()
+                    ignore cii(exact) and csi(woolf)
+                        affects not documented r(cii_method) and r(csi_method)
 1.1.1   02may2025   improve error message for invalid -c?i()- methods
 1.1.0   30apr2025   improve legend formatting for clarity
 1.0.0   30apr2025
