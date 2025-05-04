@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 1.2.0  03may2025}{...}
+{* *! version 1.2.1  04may2025}{...}
 {cmd:help tab2diag}
 {hline}
 
@@ -62,7 +62,7 @@
 complements of proportions
 {p_end}
 
-{syntab:SE / CI}
+{syntab:CI/SE}
 {synopt :{cmd:cii(}{it:{help tab2diag##cii_method:cii_method}}{cmd:)}}method 
 for calculating confidence intervals for proportions
 {p_end}
