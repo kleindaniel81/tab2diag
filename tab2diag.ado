@@ -1,4 +1,4 @@
-*! version 1.2.0  03may2025
+*! version 1.2.1  05may2025
 program tab2diag , rclass
     
     version 11.2
@@ -30,8 +30,8 @@ program tab2diag , rclass
     tempvar  refvar   classvar
     gettoken varname1 varname2 : varlist
     
-    binarize `varname1' if `touse' , generate(`refvar')
-    binarize `varname2' if `touse' , generate(`classvar')
+    binarize `varname1' if `touse' , generate(`refvar')   `legend'
+    binarize `varname2' if `touse' , generate(`classvar') `legend'
     
     // NB `refvar' and `catvar' are missing if `touse'==0
     
@@ -235,7 +235,7 @@ end
 
 program binarize
     
-    syntax varname(numeric) if , generate(name)
+    syntax varname(numeric) if , generate(name) [ noLEGEND ]
     
     marksample touse
     
@@ -246,16 +246,18 @@ program binarize
     local varlabel : variable label `varlist'
     label variable `generate' `"`macval(varlabel)'"'
     
+    if (("`legend'"=="nolegend") | !c(noisily) ) ///
+        exit
+    
     local label_0 : label (`varlist') 0 , strict
     char `generate'[label_0] `"`macval(label_0)'"'
     
-    tempname not_0
-    quietly tabulate `varlist' if `generate' & `touse' , matrow(`not_0')
-    if (r(r) == 1) {
+    summarize `varlist' if `generate' & `touse' , meanonly
+    if (r(min) == r(max)) {
         
-        char `generate'[not_0] `=`not_0'[1,1]'
+        char `generate'[not_0] `=r(min)'
         
-        local label_not_0 : label (`varlist') `=`not_0'[1,1]' , strict
+        local label_not_0 : label (`varlist') `=r(min)' , strict
         char `generate'[label_not_0] `"`macval(label_not_0)'"'
         
     }
@@ -300,6 +302,19 @@ program Tab2
     
     matrix rownames `matcell' = classified:pos classified:neg
     matrix colnames `matcell' = true_state:pos true_state:neg
+    
+end
+
+
+program copy_varlabel
+    
+    args varname1 varname2 label
+    
+    local varlabel : variable label `varname1'
+    if (`"`macval(varlabel)'"' == "") ///
+        local varlabel "`label'"
+    
+    label variable `varname2' `"`macval(varlabel)'"'
     
 end
 
@@ -351,19 +366,6 @@ program Tab2_legend_line
         local label as txt "(" as res `"`macval(label)'"' as txt ")"
     
     display as txt %12s "`posneg':" _col(15) "`varname' `exp' " _col(`=15+18+4') `label'
-    
-end
-
-
-program copy_varlabel
-    
-    args varname1 varname2 label
-    
-    local varlabel : variable label `varname1'
-    if (`"`macval(varlabel)'"' == "") ///
-        local varlabel "`label'"
-    
-    label variable `varname2' `"`macval(varlabel)'"'
     
 end
 
@@ -486,6 +488,9 @@ exit
 /*  _________________________________________________________________________
                                                               Version history
 
+1.2.1   05may2025   subroutine -binarize- uses -summarize- not -tabulate-
+                    subroutine -binarize- with option -nolegend- exits early
+                    shift position of subroutine -copy_varlabel- in code
 1.2.0   03may2025   bug fix: failed to unabbreviate suboption roctab()
                     ignore cii(exact) and csi(woolf)
                         affects not documented r(cii_method) and r(csi_method)
