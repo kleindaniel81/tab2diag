@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 1.2.1  04may2025}{...}
+{* *! version 1.3.0  15may2025}{...}
 {cmd:help tab2diag}
 {hline}
 
@@ -262,37 +262,37 @@ or as set by {helpb set level}.
 
 {synoptset 15 tabbed}{...}
 {p2col 5 15 19 2: Matrices}{p_end}
-{synopt:{cmd:sens}}sensitivity 
+{synopt:{cmd:r(sens)}}sensitivity 
 (point estimate, standard error, lower CI bound, upper CI bound)
 {p_end}
-{synopt:{cmd:spec}}specificity 
+{synopt:{cmd:r(spec)}}specificity 
 (point estimate, standard error, lower CI bound, upper CI bound)
 {p_end}
-{synopt:{cmd:ppv}}positive predictive value
+{synopt:{cmd:r(ppv)}}positive predictive value
 (point estimate, standard error, lower CI bound, upper CI bound)
 {p_end}
-{synopt:{cmd:npv}}negative predictive value
+{synopt:{cmd:r(npv)}}negative predictive value
 (point estimate, standard error, lower CI bound, upper CI bound)
 {p_end}
-{synopt:{cmd:acc}}accuracy 
+{synopt:{cmd:r(acc)}}accuracy 
 (point estimate, standard error, lower CI bound, upper CI bound)
 {p_end}
-{synopt:{cmd:prev}}prevalence 
+{synopt:{cmd:r(prev)}}prevalence 
 (point estimate, standard error, lower CI bound, upper CI bound)
 {p_end}
-{synopt:{cmd:lrp}}positive likelihood ratio 
+{synopt:{cmd:r(lrp)}}positive likelihood ratio 
 (point estimate, lower CI bound, upper CI bound)
 {p_end}
-{synopt:{cmd:lrn}}negative likelihood ratio 
+{synopt:{cmd:r(lrn)}}negative likelihood ratio 
 (point estimate, lower CI bound, upper CI bound)
 {p_end}
-{synopt:{cmd:or}}odds ratio
+{synopt:{cmd:r(or)}}odds ratio
 (point estimate, lower CI bound, upper CI bound)
 {p_end}
-{synopt:{cmd:roc}}area under ROC 
+{synopt:{cmd:r(roc)}}area under ROC 
 (point estimate, standard error, lower CI bound, upper CI bound)
 {p_end}
-{synopt:{cmd:ctable}}2 by 2 contingency table
+{synopt:{cmd:r(ctable)}}2 by 2 contingency table
 {p_end}
 
 {pstd}
@@ -301,16 +301,16 @@ with option {opt complement} additionally save the following in {cmd:r()}:
 
 {synoptset 15 tabbed}{...}
 {p2col 5 15 19 2: Matrices}{p_end}
-{synopt:{cmd:fnr}}false negative rate 
+{synopt:{cmd:r(fnr)}}false negative rate 
 (point estimate, standard error, lower CI bound, upper CI bound)
 {p_end}
-{synopt:{cmd:fpr}}false prediction rate 
+{synopt:{cmd:r(fpr)}}false prediction rate 
 (point estimate, standard error, lower CI bound, upper CI bound)
 {p_end}
-{synopt:{cmd:fdr}}false discovery rate
+{synopt:{cmd:r(fdr)}}false discovery rate
 (point estimate, standard error, lower CI bound, upper CI bound)
 {p_end}
-{synopt:{cmd:for}}false omission rate
+{synopt:{cmd:r(for)}}false omission rate
 (point estimate, standard error, lower CI bound, upper CI bound)
 {p_end}
 
