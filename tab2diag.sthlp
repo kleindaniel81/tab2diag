@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 1.3.0  15may2025}{...}
+{* *! version 1.3.1  03jun2025}{...}
 {cmd:help tab2diag}
 {hline}
 
@@ -15,7 +15,7 @@
 
 {p 8 18 2}
 {cmd:tab2diag} 
-{it:refvar} {it:classvar} 
+{it:{help varname:refvar}} {it:{help varname:classvar}} 
 {ifin} 
 {weight}
 [ {cmd:,} {it:{help tab2diag##options:options}} ]
@@ -39,9 +39,9 @@
 {c |}
 {it:{help matrix define:matrix_expression}}
 {c |}
-{cmd:(}{it:#}[{cmd:,}{it:#...}]
-[{cmd:\} {it:#}[{cmd:,}{it:#...}] [{cmd:\} {it:...}]]{cmd:)}
+{cmd:(}{it:#}{cmd:,}{it:#} {cmd:\} {it:#}{cmd:,}{it:#}{cmd:)}
 {c )-}
+[ {cmd:,} {it:{help tab2diag##options:options}} ]
 
 {col 5}with 
 
